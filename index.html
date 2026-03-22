@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sonation - Gestão Infantil</title>
+    <style>
+        :root {
+            --brand: #4a90e2;
+            --accent: #ff6b6b;
+            --bg: #f4f7f6;
+            --card: #ffffff;
+            --text: #2d3436;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        header {
+            width: 100%; background: var(--brand); color: white;
+            padding: 25px 0; text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 10;
+        }
+
+        .logo { font-size: 26px; font-weight: 900; margin: 0; letter-spacing: -0.5px; }
+        .tagline { font-size: 11px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        #app-content {
+            width: 90%; max-width: 450px;
+            padding: 20px 0 120px 0;
+        }
+
+        /* Cartão da Criança */
+        .child-card {
+            background: var(--card); border-radius: 20px;
+            padding: 20px; margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            position: relative; border: 1px solid #eee;
+        }
+
+        .child-name { font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 15px; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .info-item { background: #f8fafc; padding: 10px; border-radius: 12px; }
+        .info-item span { display: block; font-size: 11px; color: #94a3b8; font-weight: bold; text-transform: uppercase; }
+        .info-item strong { font-size: 15px; color: var(--text); }
+
+        .extra-info {
+            background: #fff5f5; padding: 12px; border-radius: 12px;
+            border-left: 4px solid var(--accent); font-size: 14px; color: #444;
+        }
+
+        .delete-btn {
+            position: absolute; top: 15px; right: 15px;
+            background: #fee2e2; color: #ef4444; border: none;
+            width: 30px; height: 30px; border-radius: 50%;
+            cursor: pointer; font-weight: bold;
+        }
+
+        /* Modal */
+        #modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 100;
+            justify-content: center; align-items: center; backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white; width: 85%; max-width: 400px;
+            padding: 25px; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .input-group { margin-bottom: 12px; }
+        label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #64748b; }
+        input, textarea { 
+            width: 100%; padding: 12px; border: 2px solid #f1f5f9; 
+            border-radius: 12px; box-sizing: border-box; font-size: 15px;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--brand); }
+
+        .btn-confirm { 
+            width: 100%; padding: 16px; background: var(--brand); 
+            color: white; border: none; border-radius: 12px; 
+            font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 10px;
+        }
+
+        /* Botão Flutuante + */
+        .fab {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            width: 65px; height: 65px; background: var(--brand);
+            color: white; border-radius: 50%; display: flex;
+            justify-content: center; align-items: center; font-size: 35px;
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5);
+            cursor: pointer; border: none; z-index: 90; transition: 0.2s;
+        }
+        .fab:active { transform: translateX(-50%) scale(0.9); }
+
+        .empty-state { text-align: center; color: #94a3b8; margin-top: 60px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="logo">Sonation</h1>
+    <div class="tagline">Son & Information System</div>
+</header>
+
+<div id="app-content">
+    <!-- Cards aparecem aqui -->
+</div>
+
+<button class="fab" onclick="toggleModal(true)">+</button>
+
+<!-- Modal -->
+<div id="modal-overlay">
+    <div class="modal-content">
+        <h2 style="margin:0 0 20px 0; color: var(--brand);">Nova Criança</h2>
+        <div class="input-group">
+            <label>Nome</label>
+            <input type="text" id="nome" placeholder="Ex: Martim">
+        </div>
+        <div class="info-grid">
+            <div class="input-group">
+                <label>Idade/Data</label>
+                <input type="text" id="idade" placeholder="2 anos">
+            </div>
+            <div class="input-group">
+                <label>Nº Sapato</label>
+                <input type="number" id="calcado" placeholder="24">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Tamanho Roupa</label>
+            <input type="text" id="roupa" placeholder="Ex: 3-4 anos">
+        </div>
+        <div class="input-group">
+            <label>Informações Extras / Notas</label>
+            <textarea id="notas" rows="3" placeholder="Alergias, marca de leite, contactos..."></textarea>
+        </div>
+        <button class="btn-confirm" onclick="addChild()">Guardar Perfil</button>
+        <button onclick="toggleModal(false)" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:15px; cursor:pointer; font-weight:600;">Voltar</button>
+    </div>
+</div>
+
+<script>
+    let childrenList = JSON.parse(localStorage.getItem('sonation_kids')) || [];
+
+    function toggleModal(show) {
+        document.getElementById('modal-overlay').style.display = show ? 'flex' : 'none';
+    }
+
+    function addChild() {
+        const name = document.getElementById('nome').value;
+        if(!name) return alert("Indique o nome da criança.");
+
+        const child = {
+            id: Date.now(),
+            nome: name,
+            idade: document.getElementById('idade').value || '---',
+            calcado: document.getElementById('calcado').value || '---',
+            roupa: document.getElementById('roupa').value || '---',
+            notas: document.getElementById('notas').value || 'Sem notas adicionais.'
+        };
+
+        childrenList.push(child);
+        saveAndRefresh();
+        toggleModal(false);
+        clearForm();
+    }
+
+    function clearForm() {
+        ['nome', 'idade', 'calcado', 'roupa', 'notas'].forEach(id => document.getElementById(id).value = '');
+    }
+
+    function deleteChild(id) {
+        if(confirm("Deseja apagar este perfil?")) {
+            childrenList = childrenList.filter(c => c.id !== id);
+            saveAndRefresh();
+        }
+    }
+
+    function saveAndRefresh() {
+        localStorage.setItem('sonation_kids', JSON.stringify(childrenList));
+        renderList();
+    }
+
+    function renderList() {
+        const container = document.getElementById('app-content');
+        if(childrenList.length === 0) {
+            container.innerHTML = `<div class="empty-state">👋 Bem-vinda!<br>Adicione o primeiro perfil abaixo.</div>`;
+            return;
+        }
+
+        container.innerHTML = childrenList.map(child => `
+            <div class="child-card">
+                <button class="delete-btn" onclick="deleteChild(${child.id})">×</button>
+                <div class="child-name">${child.nome}</div>
+                <div class="info-grid">
+                    <div class="info-item"><span>Idade</span><strong>${child.idade}</strong></div>
+                    <div class="info-item"><span>Sapato</span><strong>${child.calcado}</strong></div>
+                    <div class="info-item"><span>Roupa</span><strong>${child.roupa}</strong></div>
+                    <div class="info-item"><span>ID</span><strong>#${child.id.toString().slice(-4)}</strong></div>
+                </div>
+                <div class="extra-info">
+                    <strong>Notas:</strong><br>
+                    ${child.notas}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    renderList();
+</script>
+
+</body>
+</html>
