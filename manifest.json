@@ -1,0 +1,17 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Sonation",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Sonation",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "id": "Sonation",
+  "description": "Sonation is an app to always have in hand your childs information.",
+  "lang": "pt",
+  "share_target": {
+    "method": "GET"
+  }
+}
