@@ -4,7 +4,7 @@
   "display": "standalone",
   "name": "Sonation",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/index.html",
   "short_name": "Sonation",
   "start_url": "/index.html",
   "theme_color": "#ffffff",
@@ -13,5 +13,9 @@
   "lang": "pt",
   "share_target": {
     "method": "GET"
-  }
+  },
+  "categories": [
+    "medical",
+    "utilities"
+  ]
 }
