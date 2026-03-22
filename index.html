@@ -14,6 +14,7 @@
             --bg: #f4f7f6;
             --card: #ffffff;
             --text: #2d3436;
+            --secondary: #64748b;
         }
 
         body {
@@ -25,20 +26,19 @@
 
         header {
             width: 100%; background: var(--brand); color: white;
-            padding: 25px 0; text-align: center;
+            padding: 20px 0; text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: sticky; top: 0; z-index: 10;
         }
 
-        .logo { font-size: 26px; font-weight: 900; margin: 0; letter-spacing: -0.5px; }
-        .tagline { font-size: 11px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1.5px; }
+        .logo { font-size: 24px; font-weight: 900; margin: 0; }
+        .tagline { font-size: 10px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
 
         #app-content {
-            width: 90%; max-width: 450px;
+            width: 90%; max-width: 500px;
             padding: 20px 0 120px 0;
         }
 
-        /* Cartão da Criança */
         .child-card {
             background: var(--card); border-radius: 20px;
             padding: 20px; margin-bottom: 20px;
@@ -46,26 +46,24 @@
             position: relative; border: 1px solid #eee;
         }
 
-        .child-name { font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 15px; }
+        .child-name { font-size: 20px; font-weight: 800; color: var(--brand); margin-bottom: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px; }
         
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .info-item { background: #f8fafc; padding: 10px; border-radius: 12px; }
-        .info-item span { display: block; font-size: 11px; color: #94a3b8; font-weight: bold; text-transform: uppercase; }
-        .info-item strong { font-size: 15px; color: var(--text); }
+        .section-title { font-size: 12px; font-weight: 800; color: var(--secondary); margin: 15px 0 8px 0; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
 
-        .extra-info {
-            background: #fff5f5; padding: 12px; border-radius: 12px;
-            border-left: 4px solid var(--accent); font-size: 14px; color: #444;
-        }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+        .info-item { background: #f8fafc; padding: 8px 12px; border-radius: 10px; border: 1px solid #f1f5f9; }
+        .info-item span { display: block; font-size: 10px; color: #94a3b8; font-weight: bold; text-transform: uppercase; }
+        .info-item strong { font-size: 13px; color: var(--text); word-break: break-all; }
 
         .delete-btn {
             position: absolute; top: 15px; right: 15px;
             background: #fee2e2; color: #ef4444; border: none;
-            width: 30px; height: 30px; border-radius: 50%;
+            width: 28px; height: 28px; border-radius: 50%;
             cursor: pointer; font-weight: bold;
         }
 
-        /* Modal */
+        /* Modal com Scroll */
         #modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 100;
@@ -73,36 +71,33 @@
         }
 
         .modal-content {
-            background: white; width: 85%; max-width: 400px;
+            background: white; width: 90%; max-width: 450px;
+            max-height: 85vh; overflow-y: auto;
             padding: 25px; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        .input-group { margin-bottom: 12px; }
-        label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #64748b; }
+        .input-group { margin-bottom: 10px; }
+        label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 4px; color: #64748b; }
         input, textarea { 
-            width: 100%; padding: 12px; border: 2px solid #f1f5f9; 
-            border-radius: 12px; box-sizing: border-box; font-size: 15px;
+            width: 100%; padding: 10px; border: 2px solid #f1f5f9; 
+            border-radius: 10px; box-sizing: border-box; font-size: 14px;
         }
-        input:focus, textarea:focus { outline: none; border-color: var(--brand); }
+        input:focus { border-color: var(--brand); outline: none; }
 
         .btn-confirm { 
             width: 100%; padding: 16px; background: var(--brand); 
             color: white; border: none; border-radius: 12px; 
-            font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 10px;
+            font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 20px;
         }
 
-        /* Botão Flutuante + */
         .fab {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 65px; height: 65px; background: var(--brand);
+            width: 60px; height: 60px; background: var(--brand);
             color: white; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; font-size: 35px;
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5);
-            cursor: pointer; border: none; z-index: 90; transition: 0.2s;
+            justify-content: center; align-items: center; font-size: 30px;
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+            cursor: pointer; border: none; z-index: 90;
         }
-        .fab:active { transform: translateX(-50%) scale(0.9); }
-
-        .empty-state { text-align: center; color: #94a3b8; margin-top: 60px; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -112,40 +107,72 @@
     <div class="tagline">Son & Information System</div>
 </header>
 
-<div id="app-content">
-    <!-- Cards aparecem aqui -->
-</div>
+<div id="app-content"></div>
 
 <button class="fab" onclick="toggleModal(true)">+</button>
 
 <!-- Modal -->
 <div id="modal-overlay">
     <div class="modal-content">
-        <h2 style="margin:0 0 20px 0; color: var(--brand);">Nova Criança</h2>
+        <h2 style="margin:0 0 20px 0; color: var(--brand);">Novo Perfil Familiar</h2>
+        
+        <div class="section-title">Dados da Criança</div>
         <div class="input-group">
-            <label>Nome</label>
-            <input type="text" id="nome" placeholder="Ex: Martim">
+            <label>Nome Completo</label>
+            <input type="text" id="nome" placeholder="Nome completo da criança">
         </div>
         <div class="info-grid">
             <div class="input-group">
-                <label>Idade/Data</label>
-                <input type="text" id="idade" placeholder="2 anos">
+                <label>Data de Nascimento</label>
+                <input type="date" id="data_nasc">
             </div>
+            <div class="input-group">
+                <label>Nº Cartão Cidadão</label>
+                <input type="text" id="cc" placeholder="00000000">
+            </div>
+            <div class="input-group">
+                <label>NIF</label>
+                <input type="number" id="nif" placeholder="9 algarismos">
+            </div>
+            <div class="input-group">
+                <label>Seg. Social (NISS)</label>
+                <input type="number" id="niss" placeholder="11 algarismos">
+            </div>
+        </div>
+
+        <div class="section-title">Saúde e Vestuário</div>
+        <div class="input-group">
+            <label>Seguros de Saúde (ex: Multicare, Médis...)</label>
+            <textarea id="seguros" rows="2" placeholder="Pode listar vários..."></textarea>
+        </div>
+        <div class="info-grid">
             <div class="input-group">
                 <label>Nº Sapato</label>
                 <input type="number" id="calcado" placeholder="24">
             </div>
+            <div class="input-group">
+                <label>Tamanho Roupa</label>
+                <input type="text" id="roupa" placeholder="3-4 anos">
+            </div>
+        </div>
+
+        <div class="section-title">Dados dos Pais / Adultos</div>
+        <div class="input-group">
+            <label>Marido / Mulher / Parceiro(a)</label>
+            <input type="text" id="parceiro" placeholder="Nome do cônjuge">
         </div>
         <div class="input-group">
-            <label>Tamanho Roupa</label>
-            <input type="text" id="roupa" placeholder="Ex: 3-4 anos">
+            <label>IBAN / Conta Bancária</label>
+            <input type="text" id="iban" placeholder="PT50 0000...">
         </div>
+
         <div class="input-group">
-            <label>Informações Extras / Notas</label>
-            <textarea id="notas" rows="3" placeholder="Alergias, marca de leite, contactos..."></textarea>
+            <label>Notas Adicionais</label>
+            <textarea id="notas" rows="2" placeholder="Alergias, escola, etc..."></textarea>
         </div>
-        <button class="btn-confirm" onclick="addChild()">Guardar Perfil</button>
-        <button onclick="toggleModal(false)" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:15px; cursor:pointer; font-weight:600;">Voltar</button>
+
+        <button class="btn-confirm" onclick="addChild()">Guardar Tudo</button>
+        <button onclick="toggleModal(false)" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:15px; cursor:pointer; font-weight:600;">Cancelar</button>
     </div>
 </div>
 
@@ -158,15 +185,21 @@
 
     function addChild() {
         const name = document.getElementById('nome').value;
-        if(!name) return alert("Indique o nome da criança.");
+        if(!name) return alert("Por favor, indique pelo menos o nome.");
 
         const child = {
             id: Date.now(),
             nome: name,
-            idade: document.getElementById('idade').value || '---',
+            data_nasc: document.getElementById('data_nasc').value || '---',
+            cc: document.getElementById('cc').value || '---',
+            nif: document.getElementById('nif').value || '---',
+            niss: document.getElementById('niss').value || '---',
+            seguros: document.getElementById('seguros').value || 'Nenhum',
             calcado: document.getElementById('calcado').value || '---',
             roupa: document.getElementById('roupa').value || '---',
-            notas: document.getElementById('notas').value || 'Sem notas adicionais.'
+            parceiro: document.getElementById('parceiro').value || '---',
+            iban: document.getElementById('iban').value || '---',
+            notas: document.getElementById('notas').value || '---'
         };
 
         childrenList.push(child);
@@ -176,11 +209,12 @@
     }
 
     function clearForm() {
-        ['nome', 'idade', 'calcado', 'roupa', 'notas'].forEach(id => document.getElementById(id).value = '');
+        const ids = ['nome', 'data_nasc', 'cc', 'nif', 'niss', 'seguros', 'calcado', 'roupa', 'parceiro', 'iban', 'notas'];
+        ids.forEach(id => document.getElementById(id).value = '');
     }
 
     function deleteChild(id) {
-        if(confirm("Deseja apagar este perfil?")) {
+        if(confirm("Deseja apagar este perfil permanentemente?")) {
             childrenList = childrenList.filter(c => c.id !== id);
             saveAndRefresh();
         }
@@ -194,7 +228,7 @@
     function renderList() {
         const container = document.getElementById('app-content');
         if(childrenList.length === 0) {
-            container.innerHTML = `<div class="empty-state">👋 Bem-vinda!<br>Adicione o primeiro perfil abaixo.</div>`;
+            container.innerHTML = `<div class="empty-state" style="text-align:center; color:#94a3b8; margin-top:50px;">👋 Bem-vindo ao Sonation!<br>Clique no + para começar.</div>`;
             return;
         }
 
@@ -202,16 +236,28 @@
             <div class="child-card">
                 <button class="delete-btn" onclick="deleteChild(${child.id})">×</button>
                 <div class="child-name">${child.nome}</div>
+                
+                <div class="section-title">Documentos</div>
                 <div class="info-grid">
-                    <div class="info-item"><span>Idade</span><strong>${child.idade}</strong></div>
+                    <div class="info-item"><span>Nascimento</span><strong>${child.data_nasc}</strong></div>
+                    <div class="info-item"><span>CC</span><strong>${child.cc}</strong></div>
+                    <div class="info-item"><span>NIF</span><strong>${child.nif}</strong></div>
+                    <div class="info-item"><span>NISS</span><strong>${child.niss}</strong></div>
+                </div>
+
+                <div class="section-title">Saúde e Medidas</div>
+                <div class="info-item" style="margin-bottom:8px;"><span>Seguros</span><strong>${child.seguros}</strong></div>
+                <div class="info-grid">
                     <div class="info-item"><span>Sapato</span><strong>${child.calcado}</strong></div>
                     <div class="info-item"><span>Roupa</span><strong>${child.roupa}</strong></div>
-                    <div class="info-item"><span>ID</span><strong>#${child.id.toString().slice(-4)}</strong></div>
                 </div>
-                <div class="extra-info">
-                    <strong>Notas:</strong><br>
-                    ${child.notas}
-                </div>
+
+                <div class="section-title">Família e Financeiro</div>
+                <div class="info-item" style="margin-bottom:8px;"><span>Cônjuge/Parceiro</span><strong>${child.parceiro}</strong></div>
+                <div class="info-item"><span>IBAN</span><strong>${child.iban}</strong></div>
+
+                <div class="section-title">Notas</div>
+                <div style="font-size:13px; color:#444; padding:5px;">${child.notas}</div>
             </div>
         `).join('');
     }
